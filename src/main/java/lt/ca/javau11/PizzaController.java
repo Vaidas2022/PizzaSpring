@@ -1,6 +1,5 @@
 package lt.ca.javau11;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,8 +8,12 @@ import java.util.List;
 @RequestMapping("/api/pizzas")
 public class PizzaController {
 
-    @Autowired
     private PizzaService pizzaService;
+    
+    //Constructor injection
+    public PizzaController(PizzaService pizzaService) {
+    	this.pizzaService = pizzaService;
+    }
 
     // Grąžina visų picų sąrašą
     @GetMapping

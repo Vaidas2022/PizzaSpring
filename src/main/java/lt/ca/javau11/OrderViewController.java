@@ -10,13 +10,17 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class OrderViewController {
 
-    @Autowired
     private PizzaService pizzaService;
 
-    @Autowired
     private OrderService orderService;
+    
+    //Constructor Injection
+    public OrderViewController(PizzaService pizzaService, OrderService orderService) {
+		this.pizzaService = pizzaService;
+		this.orderService = orderService;
+	}
 
-    // Rodyti picų meniu
+	// Rodyti picų meniu
     @GetMapping("/menu")
     public String showMenu(Model model) {
         model.addAttribute("pizzas", pizzaService.getAllPizzas());

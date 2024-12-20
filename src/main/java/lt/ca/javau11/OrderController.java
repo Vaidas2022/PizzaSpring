@@ -2,7 +2,6 @@ package lt.ca.javau11;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,13 +9,14 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/orders")
 public class OrderController {
 
-    @Autowired
     private OrderService orderService;
 
-    @Autowired
-    private PizzaService pizzaService;
+    //Constructor injection
+    public OrderController(OrderService orderService) {
+		this.orderService = orderService;
+	}
 
-    // Pašalinti picą iš užsakymo
+	// Pašalinti picą iš užsakymo
     @PostMapping("/{orderId}/removePizza/{pizzaId}")
     public ResponseEntity<Void> removePizzaFromOrder(@PathVariable Long orderId, @PathVariable Long pizzaId) {
         orderService.removePizzaFromOrder(orderId, pizzaId);
